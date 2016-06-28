@@ -1,9 +1,9 @@
 import random
 
 class QLearning:
-    def __init__(self, init_value = 0, epsilon=0.2, alpha=0.2, gamma=0.9):
+    def __init__(self, init_value = 0, epsilon=0.2, alpha=0.9, gamma=0.4):
     
-        # Initialize the Q-function as a dictionary (state) of dictionaries (actions)
+        # Initialize the Q-function as a dictionary state:actions
         self.Q_function = {}
         
         # Initial value of any (state, action) tuple is an arbitrary random number
@@ -22,10 +22,24 @@ class QLearning:
         return self.Q_function[state][action]
     
     def getQfunction(self):
-        return self.Q_function    
+        return self.Q_function   
+
+    def initQfunction(self, filename, actions):
+        import pandas as pd
+        q_df = pd.read_csv(filename, sep=',', header=None)
+        try:
+            for row in xrange(q_df.shape[0]):           
+                state = q_df.loc[row][0] 
+                action_function = {}
+                col = 1
+                for action in actions:
+                    action_function[action] = q_df.loc[row][col]
+                    col += 1
+                self.Q_function[state] = action_function
+        except IOError: 
+            print 'There is no file named', filename  
 
     def chooseAction(self, state, actions, is_current):
- 
         if state in self.Q_function:
             ## Find the action that has the highest value
             action_function = self.Q_function[state]
@@ -35,7 +49,7 @@ class QLearning:
                 rand_action = random.choice(actions)
                 ## Select action using epsilon-greedy heuristic
                 rand_num = random.random()
-                action = q_action if (rand_num <= self.epsilon) else rand_action
+                action = q_action if rand_num <= (1 - self.epsilon) else rand_action
             else:
                 action = q_action
         else:
