@@ -32,8 +32,7 @@ class BasicAgent(Agent):
         right = inputs['right']
        
         #Update the current observed state
-        self.state = (light, oncoming, left, right, deadline, self.next_waypoint)
-        #self.state = (light, oncoming, left, right, self.next_waypoint)
+        self.state = (light, oncoming, left, right, self.next_waypoint)
         
         print "Basic.update(): next move = {}".format(action)  # [debug]
 
@@ -59,8 +58,7 @@ class LearningAgent(Agent):
           
 
     def reset(self, destination=None):
-        self.planner.route_to(destination) 
-        self.cumulative_reward = 0        
+        self.planner.route_to(destination)         
 
     def update(self, t):
         # Gather inputs
@@ -74,8 +72,7 @@ class LearningAgent(Agent):
         right = inputs['right']
        
         #Update the current observed state
-        self.state = (light, oncoming, left, right, deadline, self.next_waypoint)
-        #self.state = (light, oncoming, left, right, self.next_waypoint)
+        self.state = (light, oncoming, left, right, self.next_waypoint)
         current_state = self.state
         
         #Choose an action
@@ -96,11 +93,9 @@ class LearningAgent(Agent):
         oncoming = new_inputs['oncoming']
         left = new_inputs['left']
         right = new_inputs['right']
-        
-        deadline = self.env.get_deadline(self)
-        
-        state_prime = (light, oncoming, left, right, deadline, self.next_waypoint)
-        #state_prime = (light, oncoming, left, right, self.next_waypoint)
+            
+     
+        state_prime = (light, oncoming, left, right, self.next_waypoint)
           
         #Get the best action for the new state
         action_prime = self.ai.chooseAction(state_prime, self.env.valid_actions, False)    
@@ -144,8 +139,6 @@ def run(argv):
     
     try:
         opts, args = getopt.getopt(sys.argv[1:], "bst:d:pr:ho")
-        print opts
-        print args
     except getopt.GetoptError as err:
         # print help information and exit:
         print str(err) 
@@ -204,7 +197,7 @@ def crateSmartAgent(total_trials, delay, filename, withhyperparams = False, outp
                                           hyper_params["alphas"],
                                           hyper_params["gammas"]]))
         if output:
-          df = pd.DataFrame(columns=['init_value', 'epsilon', 'alpha', 'gamma','Total Steps', 'Reached Dest.'])
+          df = pd.DataFrame(columns=['init_value', 'epsilon', 'alpha', 'gamma','Total Steps', 'Reached Dest.', 'Total Reward'])
           
         for i in range(len(params)):
         
@@ -222,7 +215,7 @@ def crateSmartAgent(total_trials, delay, filename, withhyperparams = False, outp
          #print "number of successful customer drop offs:", agent.num_reached_dest    
          #print "Total Steps: {} in {} trial".format(agent.total_steps, total_trials)
          if output:
-          df.loc[i] = [params[i][0],params[i][1],params[i][2],params[i][3], agent.total_steps,agent.num_reached_dest]
+          df.loc[i] = [params[i][0],params[i][1],params[i][2],params[i][3], agent.total_steps,agent.num_reached_dest,agent.cumulative_reward]
          if preserve:
             agent.SaveQTable()
             

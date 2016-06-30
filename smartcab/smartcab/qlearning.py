@@ -1,7 +1,7 @@
 import random
 
 class QLearning:
-    def __init__(self, init_value = 0, epsilon=0.2, alpha=0.9, gamma=0.4):
+    def __init__(self, init_value = 0, epsilon=0.2, alpha=0.7, gamma=0.7):
     
         # Initialize the Q-function as a dictionary state:actions
         self.Q_function = {}
