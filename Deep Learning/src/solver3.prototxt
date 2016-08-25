@@ -1,0 +1,15 @@
+test_iter: 100
+test_interval: 250
+base_lr: 0.01
+display: 20
+max_iter: 750
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+stepsize:500
+snapshot: 750
+snapshot_prefix: "checkpoints/snapshot"
+solver_mode: GPU
+net: "src/train_val3.prototxt"
+solver_type: SGD
+random_seed: 1234
