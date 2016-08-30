@@ -8,4 +8,4 @@ In your web browser, access the notebook server using https://50.18.75.66:8888/t
 
 Password : Udacity
 
-I may stop the server to saave costs. I will be more than happy to restart the server for your experiments. Please contact me if you need to access the server.
+I may stop the server to save costs. I will be more than happy to restart the server for your experiments. Please contact me if you need to access the server.
