@@ -4,7 +4,7 @@ To run this Jupyter notebook, you will need Caffe and all the dependencies insta
 
 I have prepared all the required software for running this notebook on an Amazon Web Services Linux instance (g2.2xlarge). You can access the server from the following link.
 
-In your web browser, access the notebook server using https://PUBLIC_IP:8888, Your browser will warn that your self-signed certificate is insecure or unrecognized. That’s ok — click past the warnings, and you should get a sign-in page. Type in your password.
+In your web browser, access the notebook server using https://50.18.75.66:8888/tree, Your browser will warn that your self-signed certificate is insecure or unrecognized. That’s ok — click past the warnings, and you should get a sign-in page. Type in your password.
 
 Password : Udacity
 
